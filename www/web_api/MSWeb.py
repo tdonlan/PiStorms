@@ -415,6 +415,15 @@ def setmotorspeed():
     except Exception as e:
         pass
     return "1"
+@app.route("/setmotordegrees", methods=['POST', 'OPTIONS'])
+@crossdomain(origin='*')
+def setmotorspeed():
+    try:
+        psc.BAM1.runDegs(-int(request.form["right"]),50,False,True)
+        psc.BAM2.runDegs(-int(request.form["left"]),50,False,True)
+    except Exception as e:
+        pass
+    return "1"
     
 @app.route("/floatmotors", methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
