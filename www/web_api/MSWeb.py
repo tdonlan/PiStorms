@@ -417,7 +417,7 @@ def setmotorspeed():
     return "1"
 @app.route("/setmotordegrees", methods=['POST', 'OPTIONS'])
 @crossdomain(origin='*')
-def setmotorspeed():
+def setmotordegrees():
     try:
         psc.BAM1.runDegs(-int(request.form["right"]),50,False,True)
         psc.BAM2.runDegs(-int(request.form["left"]),50,False,True)
