@@ -350,7 +350,7 @@ $('#color2').minicolors({
       }
       if (movecnt > 1 && (new Date().getTime() / 1000 - lt > 0.3 || evt.type == "end") && evt.type != "start") {
         if (evt.type != "end") {
-            $.post(api+"setmotorspeed", {right: Math.round(r), 0, stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
+            $.post(api+"setmotorspeed", {right: Math.round(r), left:0, stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
               console.log(r + " " + l);
             });
             $.post(api+"setmotordegrees", {right: 0, left: Math.round(l), stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
