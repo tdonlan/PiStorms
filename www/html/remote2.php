@@ -354,26 +354,21 @@ $('#color2').minicolors({
         }
       }
 
-      var diff = l - prevL;
-      var moveDegrees = false;
-      if(Math.abs(diff) > 10){
-        prevL = l;
-        moveDegrees = true;
-      }
-      
-
-      console.log("L: " + l + " diff: " + diff);
-
       if (movecnt > 1 && (new Date().getTime() / 1000 - lt > 0.3 || evt.type == "end") && evt.type != "start") {
         if (evt.type != "end") {
+            var diff = l - prevL;
+
+            if(Math.abs(diff) > 10){
+              prevL = l;
+               $.post(api+"setmotordegrees", {right: 0, left: Math.round(diff), stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
+                console.log("MotorDegrees: " + diff);
+              });
+            }
+
             $.post(api+"setmotorspeed", {right: Math.round(r), left:0, stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
               console.log("MotorSpeed: " + r);
             });
-            if(moveDegrees){
-                $.post(api+"setmotordegrees", {right: 0, left: Math.round(diff), stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
-              console.log("MotorDegrees: " + diff);
-              });
-            }
+
         } else {
             $.get(api+ ($("#stopcheck").is(':checked') ? "floatmotors" : "brakemotors"), function(data){});
             $.get(api+ ($("#stopcheck").is(':checked') ? "floatmotors" : "brakemotors"), function(data){});
