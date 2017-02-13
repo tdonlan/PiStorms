@@ -320,6 +320,7 @@ $('#color2').minicolors({
     var movecnt = 0;
     
     var lt = 0;
+    var prevLm = 0;
     manager.on('move dir start end', function (evt, data) {
       var r = 0;
       var l = 0;
@@ -327,34 +328,43 @@ $('#color2').minicolors({
         var d = data.angle.degree;
         console.log(d + " " + data.distance);
         if (d >= 0 && d < 90) {
+            //upper-right
             var rm = n(0,90,-127,127,d);
             var lm = 127;
             r = rm / 64 * data.distance;
             l = lm / 64 * data.distance;
         } else if (d >= 90 && d < 180) {
+            //upper-left
             var rm = 127;
             var lm = n(0,90,127,-127,d-90);
             r = rm / 64 * data.distance;
             l = lm / 64 * data.distance;
         } else if (d >= 180 && d < 270) {
+          //lower-left
             var rm = -127;
             var lm = d < 225 ? n(0,45,-127,0,d-180) : n(0,45,0,-127,d-225);
             r = rm / 64 * data.distance;
             l = lm / 64 * data.distance;
         } else {
+          //lower-right
             var rm = d < 315 ? n(0,45,-127,0,d-270) : n(0,45,0,-127,d-315);
             var lm = -127;
             r = rm / 64 * data.distance;
             l = lm / 64 * data.distance;
         }
       }
+
+      var diff = l - prevL;
+      var newL = prevL - diff;
+      prevL = newl;
+
       if (movecnt > 1 && (new Date().getTime() / 1000 - lt > 0.3 || evt.type == "end") && evt.type != "start") {
         if (evt.type != "end") {
             $.post(api+"setmotorspeed", {right: Math.round(r), left:0, stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
-              console.log(r + " " + l);
+              console.log("MotorSpeed: " + r);
             });
-            $.post(api+"setmotordegrees", {right: 0, left: Math.round(l), stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
-              console.log(r + " " + l);
+            $.post(api+"setmotordegrees", {right: 0, left: Math.round(newL), stop: $("#stopcheck").is(':checked') ? "float" : "brake"}, function(result) {
+              console.log("MotorDegrees: " + newL);
             });
         } else {
             $.get(api+ ($("#stopcheck").is(':checked') ? "floatmotors" : "brakemotors"), function(data){});

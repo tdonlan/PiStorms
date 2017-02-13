@@ -410,8 +410,8 @@ def savescript():
 @crossdomain(origin='*')
 def setmotorspeed():
     try:
-        psc.BAM1.setSpeed(-int(request.form["right"]))
-        psc.BAM2.setSpeed(-int(request.form["left"]))
+        psc.BAM1.setSpeed(int(request.form["right"]))
+        #psc.BAM2.setSpeed(-int(request.form["left"]))
     except Exception as e:
         pass
     return "1"
@@ -419,8 +419,8 @@ def setmotorspeed():
 @crossdomain(origin='*')
 def setmotordegrees():
     try:
-        psc.BAM1.runDegs(-int(request.form["right"]),50,False,True)
-        psc.BAM2.runDegs(-int(request.form["left"]),50,False,True)
+        #psc.BAM1.runDegs(int(request.form["right"]),50,False,True)
+        psc.BAM2.runDegs(int(request.form["left"]),50,False,True)
     except Exception as e:
         pass
     return "1"
