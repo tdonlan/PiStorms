@@ -320,13 +320,13 @@ $('#color2').minicolors({
     var movecnt = 0;
     
     var lt = 0;
-    var prevLm = 0;
+    var prevL = 0;
     manager.on('move dir start end', function (evt, data) {
       var r = 0;
       var l = 0;
       if (data.distance) {
         var d = data.angle.degree;
-        console.log(d + " " + data.distance);
+        console.log("Degree: " + d + " Distance: " + data.distance);
         if (d >= 0 && d < 90) {
             //upper-right
             var rm = n(0,90,-127,127,d);
@@ -356,7 +356,9 @@ $('#color2').minicolors({
 
       var diff = l - prevL;
       var newL = prevL - diff;
-      prevL = newl;
+      prevL = newL;
+
+      console.log("L: " + l + " diff: " + diff + " newL: " + newL);
 
       if (movecnt > 1 && (new Date().getTime() / 1000 - lt > 0.3 || evt.type == "end") && evt.type != "start") {
         if (evt.type != "end") {
