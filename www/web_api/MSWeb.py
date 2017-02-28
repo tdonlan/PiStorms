@@ -416,9 +416,9 @@ def setmotorspeed():
         pass
     return "1"
 
-@app.route("/camera-still", methods=['POST', 'OPTIONS'])
+@app.route("/camerastill", methods=['POST', 'OPTIONS'])
 @crossdomain(origin='*')
-def camera-still():
+def camerastill():
     try:
         os.system('raspistill -t 10 -o /var/www/html/image.jpg -n')
     except Exception as e:
