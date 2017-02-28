@@ -119,7 +119,8 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
         
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="box box-danger">
-           
+           <img id="imgCamera" src="image.jpg"/>
+           <button id="btnSnap">Take Pic!</button>
           </div>
         </div>     
       </div>
@@ -139,6 +140,19 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
 <script type="text/javascript" src="assets/bootstrap-slider.min.js"></script>
 <script type="text/javascript" src="assets/jquery.minicolors.min.js"></script>
 <script src="assets/bootstrap-toggle.min.js"></script>
+<script>
+var api = "http://<?=$_SERVER['SERVER_NAME']?>:3141/";
+
+  $(document).on("click", "#btnSnap", function() {
+    $.ajax({
+        type: "POST",
+        url: api+"camerastill",
+        success: function(data) {
+            $("#imgCamera").attr('src', 'image.jpg' + '?_=' + new Date().getTime());
+        }
+    });
+});
+</script>
 
 </body>
 </html>
