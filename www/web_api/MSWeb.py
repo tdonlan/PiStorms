@@ -420,7 +420,7 @@ def setmotorspeed():
 @crossdomain(origin='*')
 def camerastill():
     try:
-        os.system('raspistill -t 10 -o /var/www/html/image.jpg -n')
+        os.system('raspistill -w 1280 -h 720 -q 8 -t 5 -o /var/www/html/image.jpg -n')
     except Exception as e:
         pass
     return "1"
