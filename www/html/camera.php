@@ -48,6 +48,7 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
   <link rel="stylesheet" href="assets/slider.css">
   <link href="assets/bootstrap-toggle.min.css" rel="stylesheet">
   <style>
+    img {max-width:100%}
     .btn-sq {
       width: 50px !important;
       height: 50px !important;
