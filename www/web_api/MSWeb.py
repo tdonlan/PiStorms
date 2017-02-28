@@ -433,6 +433,15 @@ def camerastill():
     except Exception as e:
         pass
     return "1"
+
+@app.route("/camerastill", methods=['POST', 'OPTIONS'])
+@crossdomain(origin='*')
+def camerastill():
+    try:
+        os.system('raspistill -w 1280 -h 720 -q 8 -t 5 -o /var/www/html/image.jpg -n')
+    except Exception as e:
+        pass
+    return "1"
     
 @app.route("/floatmotors", methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
