@@ -40,7 +40,7 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
         </li>
         <li><a href="#"><i class="fa fa-code"></i> <span>Programs</span></a></li>
         <li><a href="pictures.php"><i class="fa fa-image"></i> <span>Screenshots</span></a></li>
-        <li><a href="remote.php"><i class="fa fa-arrows"></i> <span>Remote Control</span></a></li>
+        <li><a href="control.php"><i class="fa fa-arrows"></i> <span>Remote Control</span></a></li>
         <li><a href="log.php"><i class="fa fa-file-text-o"></i> <span>Logs</span></a></li>
         <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
       </ul>
